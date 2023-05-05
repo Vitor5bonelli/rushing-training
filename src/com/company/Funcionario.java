@@ -14,6 +14,15 @@ public class Funcionario {
     private Estado estadoFuncionario;
 
 
+    public Funcionario(int cpf, Papel papel) { //falta colocar mais paramentros só
+        this.cpf = cpf;
+        this.papel = papel;
+    }
+
+    public void alterarFuncionario(int newCpf){  //também falta adicionar mais paramentros
+        this.cpf = newCpf;
+    }
+
     public boolean verificarAdmin(){
         if (estadoFuncionario == Estado.INATIVO) return false;
         return papel == Papel.ADMIN;
@@ -27,4 +36,11 @@ public class Funcionario {
         estadoFuncionario = Estado.ATIVO;
     }
 
+    @Override
+    public String toString() {
+        return "Funcionario{" +
+                "cpf=" + cpf +
+                ", papel=" + papel +
+                '}';
+    }
 }

@@ -29,7 +29,9 @@ public class Main {
         System.out.println(treinoDAO.findOne("treino3"));
 
 
-        Funcionario func1 = new Funcionario();
-
+        Funcionario func1 = new Funcionario(389,Papel.INSTRUTOR);
+        System.out.println(func1);
+        func1.alterarFuncionario(1111);
+        System.out.println(func1);
     }
 }
