@@ -14,9 +14,11 @@ public class Funcionario {
     private Estado estadoFuncionario;
 
 
-    public Funcionario(int cpf, Papel papel) { //falta colocar mais paramentros só
+    public Funcionario(int cpf, Papel papel, String nome, String senha) { //falta colocar mais paramentros só
         this.cpf = cpf;
         this.papel = papel;
+        this.senha = senha;
+        this.nome = nome;
     }
 
     public void alterarFuncionario(int newCpf){  //também falta adicionar mais paramentros
@@ -39,7 +41,9 @@ public class Funcionario {
     @Override
     public String toString() {
         return "Funcionario{" +
-                "cpf=" + cpf +
+                "nome='" + nome +
+                ", cpf=" + cpf +
+                ", senha='" + senha +
                 ", papel=" + papel +
                 '}';
     }

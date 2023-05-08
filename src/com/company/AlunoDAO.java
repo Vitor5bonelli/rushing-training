@@ -3,18 +3,8 @@ package com.company;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AlunoDAO implements GenericDAO<Integer, Aluno>{
-    private final Map<Integer, Aluno> alunos = new HashMap<Integer, Aluno>();
-    private static AlunoDAO ALUNO_DAO;
-
-    private AlunoDAO() {
-    }
-
-    public static AlunoDAO getInstance(){
-        if (ALUNO_DAO == null)
-            ALUNO_DAO = new AlunoDAO();
-        return ALUNO_DAO;
-    }
+public class AlunoDAO extends GenericDAO2<Integer, Aluno>{
+    private static final Map<Integer, Aluno> alunos = new HashMap<Integer, Aluno>();
 
 
     @Override
