@@ -3,7 +3,7 @@ package com.company;
 import javax.print.DocFlavor;
 import java.util.List;
 
-public class Funcionario {
+public class Funcionario implements Entidade<Integer> {
     //private String usuario; o usuario pode ser o cpf, nome ou email
     private int cpf;
     private String senha;
@@ -14,11 +14,18 @@ public class Funcionario {
     private Estado estadoFuncionario;
 
 
-    public Funcionario(int cpf, Papel papel, String nome, String senha) { //falta colocar mais paramentros só
+    public Funcionario(int cpf, Papel papel, String nome, String senha) { //falta colocar mais parâmetros só
         this.cpf = cpf;
         this.papel = papel;
         this.senha = senha;
         this.nome = nome;
+        FuncionarioDAO funcDAO = new FuncionarioDAO();
+        funcDAO.insert(this);
+
+    }
+
+    public int getCpf() {
+        return cpf;
     }
 
     public void alterarFuncionario(int newCpf){  //também falta adicionar mais paramentros
@@ -46,5 +53,10 @@ public class Funcionario {
                 ", senha='" + senha +
                 ", papel=" + papel +
                 '}';
+    }
+
+    @Override
+    public Integer getId() {
+        return cpf;
     }
 }

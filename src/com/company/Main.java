@@ -3,6 +3,9 @@ package com.company;
 public class Main {
 
     public static void main(String[] args) {
+        ExercicioDAO exDAO = ExercicioDAO.getInstance();
+        TreinoDAO treinoDAO = TreinoDAO.getInstance();
+        FuncionarioDAO funcDAO = new FuncionarioDAO();
 
         //////teste dao de exercicios
         System.out.println("");
@@ -11,8 +14,11 @@ public class Main {
         new Exercicio("Supino", "Halteres", 20, 40);
         new Exercicio("Flexão de Braço", "Peso Corporal", 0, 0);
 
-        ExercicioDAO exDAO = ExercicioDAO.getInstance();
-        TreinoDAO treinoDAO = TreinoDAO.getInstance();
+        System.out.println("");
+        System.out.println(exDAO.findOne("Agachamento"));
+        System.out.println(exDAO.findOne("Supino"));
+        System.out.println(exDAO.findOne("Flexão de Braço"));
+
 
 
         /////teste dao de treinos
@@ -22,7 +28,7 @@ public class Main {
         new Treino("treino2");
         new Treino("treino3");
         treinoDAO.findOne("treino1").inserirExercicio("Agachamento", 20);
-        treinoDAO.findOne("treino1").inserirExercicio("Supino", 15);
+
         treinoDAO.findOne("treino2").inserirExercicio("Supino", 15);
         treinoDAO.findOne("treino2").inserirExercicio("Flexão de Braço", 10);
         treinoDAO.findOne("treino3").inserirExercicio("Agachamento", 20);
@@ -53,13 +59,17 @@ public class Main {
         ////teste de funcionarios (falta o dao de funcionario)
         System.out.println("");
         System.out.println("______________________________funcionarios_______________________________");
-        Funcionario func1 = new Funcionario(789,Papel.INSTRUTOR, "renato", "123");
-        Funcionario func2 = new Funcionario(345,Papel.ADMIN, "melissa", "senha123");
-        System.out.println(func1);
+        new Funcionario(789,Papel.INSTRUTOR, "renato", "123");
+        new Funcionario(345,Papel.ADMIN, "melissa", "senha123");
+
+        System.out.println(funcDAO.findOne(789));
+        System.out.println(funcDAO.findOne(345));
+
+        /*System.out.println(func1);
         System.out.println(func2);
         System.out.println("alterando cpf func1");
         func1.alterarFuncionario(1111);
-        System.out.println(func1);
+        System.out.println(func1);*/
 
 
     }

@@ -23,7 +23,7 @@ public class Treino {
 
     //public boolean editarTreino() --- qual o sentido da funcao?? edita o treino pelos sets
 
-    //implementações extras para melhorar o fnucionamento do codigo
+    //implementações extras para melhorar o funcionamento do codigo
 
     public String getNome() {
         return NOME;
