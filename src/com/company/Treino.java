@@ -1,9 +1,11 @@
 package com.company;
 
+import com.company.interfaces.Entidade;
+
 import java.util.HashMap;
 import java.util.Map;
 
-public class Treino {
+public class Treino implements Entidade<String> {
     private final String NOME;
     private String descricao;
     private final Map<String, Integer> exercicios = new HashMap<>();
@@ -11,8 +13,6 @@ public class Treino {
 
     public Treino(String nome) {
         this.NOME = nome;
-        TreinoDAO treinoDAO = TreinoDAO.getInstance();
-        treinoDAO.insert(this);//adiciona automaticamente no ExercicioDAO
     }
 
     public void inserirExercicio(String nomeExercicio, int repeticoes){
@@ -51,5 +51,10 @@ public class Treino {
                 ", repeticaoTreino=" + repeticaoTreino +
                 ", exercicios:" + listarExercicios() + '}';
 
+    }
+
+    @Override
+    public String getId() {
+        return NOME;
     }
 }

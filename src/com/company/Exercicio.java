@@ -1,9 +1,9 @@
 package com.company;
 
-import java.awt.*;
+import com.company.interfaces.Entidade;
 
-public class Exercicio {
-    final private String nome;
+public class Exercicio implements Entidade<String> {
+    final private String NOME;
     private String aparelho;
     //private Image image = new Image(new FileInputStream("path of the image"));
     //implementar somente quando junto a interface
@@ -11,12 +11,10 @@ public class Exercicio {
     private int pesoMax;
 
     public Exercicio(String nome, String aparelho, int pesoMin, int pesoMax) {
-        this.nome = nome;
+        this.NOME = nome;
         this.aparelho = aparelho;
         this.pesoMin = pesoMin;
         this.pesoMax = pesoMax;
-        ExercicioDAO exDAO = ExercicioDAO.getInstance();
-        exDAO.insert(this);//adiciona automaticamente no ExercicioDAO
     }
 
     public void editarExercicio(String aparelho, int pesoMin, int pesoMax) {
@@ -25,17 +23,22 @@ public class Exercicio {
         this.pesoMax = pesoMax;
     }
 
-    public String getNome() {
-        return nome;
+    public String getNOME() {
+        return NOME;
     }
 
     @Override
     public String toString() {
         return "Exercicio{" +
-                "nome='" + nome + '\'' +
+                "nome='" + NOME + '\'' +
                 ", aparelho='" + aparelho + '\'' +
                 ", pesoMin=" + pesoMin +
                 ", pesoMax=" + pesoMax +
                 '}';
+    }
+
+    @Override
+    public String getId() {
+        return NOME;
     }
 }

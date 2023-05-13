@@ -1,9 +1,12 @@
 package com.company;
 
+import com.company.dao.AlunoDAO;
+import com.company.interfaces.Entidade;
+
 import java.time.LocalDate;
 import java.util.List;
 
-public class Aluno implements Entidade<Integer>{
+public class Aluno implements Entidade<Integer> {
     private String matricula;
     private String senha;
     private String nome;
@@ -21,8 +24,6 @@ public class Aluno implements Entidade<Integer>{
         this.senha = senha;
         this.nome = nome;
         this.cpf = cpf;
-        AlunoDAO alunoDAO = new AlunoDAO();
-        alunoDAO.insert(this);
     }
     // treino
 

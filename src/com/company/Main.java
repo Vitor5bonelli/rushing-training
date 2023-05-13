@@ -1,11 +1,16 @@
 package com.company;
 
+import com.company.dao.AlunoDAO;
+import com.company.dao.FuncionarioDAO;
+import com.company.dao.TreinoDAO;
+
 public class Main {
 
     public static void main(String[] args) {
-        ExercicioDAO exDAO = ExercicioDAO.getInstance();
-        TreinoDAO treinoDAO = TreinoDAO.getInstance();
-        FuncionarioDAO funcDAO = new FuncionarioDAO();
+
+        GenericDAO<String, Treino> exDAO = new TreinoDAO();
+
+        GenericDAO<String, Treino> treinoDAO = new TreinoDAO();
 
         //////teste dao de exercicios
         System.out.println("");
@@ -24,9 +29,10 @@ public class Main {
         /////teste dao de treinos
         System.out.println("");
         System.out.println("______________________________treinos_______________________________");
-        new Treino("treino1");
-        new Treino("treino2");
-        new Treino("treino3");
+        treinoDAO.insert(new Treino("treino1"));
+        treinoDAO.insert(new Treino("treino2"));
+        treinoDAO.insert(new Treino("treino3"));
+
         treinoDAO.findOne("treino1").inserirExercicio("Agachamento", 20);
 
         treinoDAO.findOne("treino2").inserirExercicio("Supino", 15);
@@ -43,12 +49,13 @@ public class Main {
         ////teste dao de alunos
         System.out.println("");
         System.out.println("______________________________alunos_______________________________");
-        new Aluno("123", "luiz", 1234);
-        new Aluno("123", "laura", 2345);
-        new Aluno("123", "regina", 3456);
-        new Aluno("123", "carlos", 4567);
 
-        AlunoDAO alunoDAO = new AlunoDAO();
+        GenericDAO<Integer, Aluno> alunoDAO = new AlunoDAO();
+        alunoDAO.insert(new Aluno("123", "luiz", 1234));
+        alunoDAO.insert(new Aluno("123", "laura", 2345));
+        alunoDAO.insert(new Aluno("123", "regina", 3456));
+        alunoDAO.insert(new Aluno("123", "carlos", 4567));
+
         System.out.println(alunoDAO.findOne(1234));
         System.out.println(alunoDAO.findOne(2345));
         System.out.println(alunoDAO.findOne(3456));
@@ -59,11 +66,13 @@ public class Main {
         ////teste de funcionarios (falta o dao de funcionario)
         System.out.println("");
         System.out.println("______________________________funcionarios_______________________________");
-        new Funcionario(789,Papel.INSTRUTOR, "renato", "123");
-        new Funcionario(345,Papel.ADMIN, "melissa", "senha123");
-
+        GenericDAO<Integer, Funcionario> funcDAO = new FuncionarioDAO();
+        funcDAO.insert(new Funcionario(789,Papel.INSTRUTOR, "renato", "123"));
+        funcDAO.insert(new Funcionario(345,Papel.ADMIN, "melissa", "senha123"));
+        funcDAO.insert(new Funcionario(346,Papel.ADMIN, "melissa2", "senha123"));
         System.out.println(funcDAO.findOne(789));
         System.out.println(funcDAO.findOne(345));
+        System.out.println(funcDAO.findOne(346));
 
         /*System.out.println(func1);
         System.out.println(func2);

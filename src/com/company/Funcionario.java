@@ -1,6 +1,7 @@
 package com.company;
 
-import javax.print.DocFlavor;
+import com.company.interfaces.Entidade;
+
 import java.util.List;
 
 public class Funcionario implements Entidade<Integer> {
@@ -19,8 +20,6 @@ public class Funcionario implements Entidade<Integer> {
         this.papel = papel;
         this.senha = senha;
         this.nome = nome;
-        FuncionarioDAO funcDAO = new FuncionarioDAO();
-        funcDAO.insert(this);
 
     }
 
