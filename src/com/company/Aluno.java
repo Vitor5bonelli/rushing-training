@@ -20,6 +20,10 @@ public class Aluno implements Entidade<Integer> {
     //fichaMedica é boolean no documento???? kk
     private Estado estadoAluno;
 
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
     public Aluno(String senha, String nome, int cpf) {
         this.senha = senha;
         this.nome = nome;

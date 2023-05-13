@@ -65,7 +65,7 @@ public class Main {
         System.out.println(funcDAO.findOne(789));
         System.out.println(funcDAO.findOne(345));
         System.out.println(funcDAO.findOne(346));
-        
+
         System.out.println(funcDAO.findOne(789));
 
 
@@ -81,10 +81,18 @@ public class Main {
         System.out.println("______________________________alunos_______________________________");
 
         GenericDAO<Integer, Aluno> alunoDAO = new AlunoDAO();
-        funcDAO.findOne(345).adicionarAluno(new Aluno("123", "luiz", 1234), (AlunoDAO) alunoDAO);
-        funcDAO.findOne(345).adicionarAluno(new Aluno("123", "laura", 2345), (AlunoDAO) alunoDAO);
-        funcDAO.findOne(345).adicionarAluno(new Aluno("123", "regina", 3456), (AlunoDAO) alunoDAO);
-        funcDAO.findOne(345).adicionarAluno(new Aluno("123", "carlos", 4567), (AlunoDAO) alunoDAO);
+        Aluno aluno1 = new Aluno("123", "luiz", 1234);
+        Aluno aluno2 = new Aluno("123", "laura", 2345);
+        Aluno aluno3 = new Aluno("123", "regina", 3456);
+        Aluno aluno4 = new Aluno("123", "carlos", 4567);
+        funcDAO.findOne(345).adicionarAluno(aluno1, (AlunoDAO) alunoDAO);
+        funcDAO.findOne(345).adicionarAluno(aluno2, (AlunoDAO) alunoDAO);
+        funcDAO.findOne(345).adicionarAluno(aluno3, (AlunoDAO) alunoDAO);
+        funcDAO.findOne(345).adicionarAluno(aluno4, (AlunoDAO) alunoDAO);
+
+        aluno4.setNome("carlos antonio");
+
+        funcDAO.findOne(345).atualizarAluno(aluno4, (AlunoDAO) alunoDAO);
 
 
         System.out.println(alunoDAO.findOne(1234));

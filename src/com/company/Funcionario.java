@@ -49,6 +49,13 @@ public class Funcionario implements Entidade<Integer> {
         alunoDAO.insert(aluno);
     }
 
+    public void atualizarAluno(Aluno aluno, AlunoDAO alunoDAO){
+        // só estou passando o DAO para poder adicionar no mesmo DAO da main, com banco de dados não vai ter
+        if(estadoFuncionario == Estado.INATIVO) return;
+        if(papel == Papel.INSTRUTOR) return;
+        alunoDAO.update(aluno.getId(), aluno);
+    }
+
     public void cadastrarInstrutor(Funcionario func, FuncionarioDAO funcDAO){
         // só estou passando o DAO para poder adicionar no mesmo DAO da main, com banco de dados não vai ter
         if(estadoFuncionario == Estado.INATIVO) return;
