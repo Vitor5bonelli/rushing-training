@@ -56,6 +56,18 @@ public class Funcionario implements Entidade<Integer> {
         funcDAO.insert(func);
     }
 
+    public void atualizarInstrutor(Funcionario func, FuncionarioDAO funcDAO){
+        // só estou passando o DAO para poder adicionar no mesmo DAO da main, com banco de dados não vai ter
+        if(estadoFuncionario == Estado.INATIVO) return;
+        if(papel == Papel.INSTRUTOR) return;
+        if(func.getPapel() == Papel.ADMIN) return;
+        funcDAO.update(func.getId(), func);
+    }
+
+    public Papel getPapel() {
+        return papel;
+    }
+
     @Override
     public String toString() {
         return "Funcionario{" +

@@ -53,6 +53,7 @@ public class Main {
         System.out.println("______________________________funcionarios_______________________________");
         GenericDAO<Integer, Funcionario> funcDAO = new FuncionarioDAO();
         Funcionario instrutor1 = new Funcionario(789,Papel.INSTRUTOR, "renato", "123", Estado.ATIVO);
+        Funcionario instrutor1_2 = new Funcionario(789,Papel.INSTRUTOR, "renato garcia", "123", Estado.ATIVO);
         Funcionario adm1 = new Funcionario(345,Papel.ADMIN, "melissa", "senha123", Estado.ATIVO);
         Funcionario adm2 = new Funcionario(346,Papel.ADMIN, "melissa2", "senha123", Estado.ATIVO);
 
@@ -64,6 +65,9 @@ public class Main {
         System.out.println(funcDAO.findOne(789));
         System.out.println(funcDAO.findOne(345));
         System.out.println(funcDAO.findOne(346));
+        
+        System.out.println(funcDAO.findOne(789));
+
 
         /*System.out.println(func1);
         System.out.println(func2);
