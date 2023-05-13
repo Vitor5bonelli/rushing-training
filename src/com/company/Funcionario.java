@@ -1,5 +1,6 @@
 package com.company;
 
+import com.company.dao.AlunoDAO;
 import com.company.interfaces.Entidade;
 
 import java.util.List;
@@ -15,12 +16,12 @@ public class Funcionario implements Entidade<Integer> {
     private Estado estadoFuncionario;
 
 
-    public Funcionario(int cpf, Papel papel, String nome, String senha) { //falta colocar mais parâmetros só
+    public Funcionario(int cpf, Papel papel, String nome, String senha, Estado estado) { //falta colocar mais parâmetros só
         this.cpf = cpf;
         this.papel = papel;
         this.senha = senha;
         this.nome = nome;
-
+        this.estadoFuncionario = estado;
     }
 
     public int getCpf() {
@@ -36,12 +37,15 @@ public class Funcionario implements Entidade<Integer> {
         return papel == Papel.ADMIN;
     }
 
-    public void inativarFuncionario(){
-        estadoFuncionario = Estado.INATIVO;
+    public void mudarEstado(Estado estado){
+        estadoFuncionario = estado;
     }
 
-    public void ativarFuncionario(){
-        estadoFuncionario = Estado.ATIVO;
+    public void adicionarAluno(Aluno aluno, AlunoDAO alunoDAO){
+        // só estou passando o DAO para poder adicionar no mesmo DAO da main, com banco de dados não vai ter
+        if(estadoFuncionario == Estado.INATIVO) return;
+        if(papel == Papel.INSTRUTOR) return;
+        alunoDAO.insert(aluno);
     }
 
     @Override
@@ -51,6 +55,7 @@ public class Funcionario implements Entidade<Integer> {
                 ", cpf=" + cpf +
                 ", senha='" + senha +
                 ", papel=" + papel +
+                ", estado=" + estadoFuncionario +
                 '}';
     }
 
