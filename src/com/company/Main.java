@@ -1,6 +1,7 @@
 package com.company;
 
 import com.company.dao.AlunoDAO;
+import com.company.dao.ExercicioDAO;
 import com.company.dao.FuncionarioDAO;
 import com.company.dao.TreinoDAO;
 
@@ -8,16 +9,46 @@ public class Main {
 
     public static void main(String[] args) {
 
-        GenericDAO<String, Treino> exDAO = new TreinoDAO();
-
+        GenericDAO<String, Exercicio> exDAO = new ExercicioDAO();
         GenericDAO<String, Treino> treinoDAO = new TreinoDAO();
 
+        System.out.println("______________________________funcionarios_______________________________");
+        GenericDAO<Integer, Funcionario> funcDAO = new FuncionarioDAO();
+        Funcionario instrutor1 = new Funcionario(789,Papel.INSTRUTOR, "renato", "123", Estado.ATIVO);
+        Funcionario instrutor1_2 = new Funcionario(789,Papel.INSTRUTOR, "renato garcia", "123", Estado.ATIVO);
+        Funcionario adm1 = new Funcionario(345,Papel.ADMIN, "melissa", "senha123", Estado.ATIVO);
+        Funcionario adm2 = new Funcionario(346,Papel.ADMIN, "melissa2", "senha123", Estado.ATIVO);
+
+        funcDAO.insert(adm1);
+        funcDAO.insert(adm2);
+        funcDAO.findOne(346).mudarEstado(Estado.INATIVO);
+        funcDAO.findOne(345).cadastrarInstrutor(instrutor1, (FuncionarioDAO) funcDAO);
+
+        System.out.println(funcDAO.findOne(789));
+        System.out.println(funcDAO.findOne(345));
+        System.out.println(funcDAO.findOne(346));
+
+        System.out.println(funcDAO.findOne(789));
+
+
+        /*System.out.println(func1);
+        System.out.println(func2);
+        System.out.println("alterando cpf func1");
+        func1.alterarFuncionario(1111);
+        System.out.println(func1);*/
+
+
+        System.out.println();
         //////teste dao de exercicios
         System.out.println();
         System.out.println("______________________________exercicios_______________________________");
-        new Exercicio("Agachamento", "Barra", 50, 100);
-        new Exercicio("Supino", "Halteres", 20, 40);
-        new Exercicio("Flexão de Braço", "Peso Corporal", 0, 0);
+        Exercicio exercicio1 = new Exercicio("Agachamento", "Barra", 50, 100);
+        Exercicio exercicio2 = new Exercicio("Supino", "Halteres", 20, 40);
+        Exercicio exercicio3 = new Exercicio("Flexão de Braço", "Peso Corporal", 0, 0);
+
+        funcDAO.findOne(789).adicionarExercicio(exercicio1, (ExercicioDAO) exDAO);
+        funcDAO.findOne(789).adicionarExercicio(exercicio2, (ExercicioDAO) exDAO);
+        funcDAO.findOne(789).adicionarExercicio(exercicio3, (ExercicioDAO) exDAO);
 
         System.out.println();
         System.out.println(exDAO.findOne("Agachamento"));
@@ -44,36 +75,6 @@ public class Main {
         System.out.println(treinoDAO.findOne("treino1"));
         System.out.println(treinoDAO.findOne("treino2"));
         System.out.println(treinoDAO.findOne("treino3"));
-
-
-
-
-        ////teste de funcionarios (falta o dao de funcionario)
-        System.out.println();
-        System.out.println("______________________________funcionarios_______________________________");
-        GenericDAO<Integer, Funcionario> funcDAO = new FuncionarioDAO();
-        Funcionario instrutor1 = new Funcionario(789,Papel.INSTRUTOR, "renato", "123", Estado.ATIVO);
-        Funcionario instrutor1_2 = new Funcionario(789,Papel.INSTRUTOR, "renato garcia", "123", Estado.ATIVO);
-        Funcionario adm1 = new Funcionario(345,Papel.ADMIN, "melissa", "senha123", Estado.ATIVO);
-        Funcionario adm2 = new Funcionario(346,Papel.ADMIN, "melissa2", "senha123", Estado.ATIVO);
-
-        funcDAO.insert(adm1);
-        funcDAO.insert(adm2);
-        funcDAO.findOne(346).mudarEstado(Estado.INATIVO);
-        funcDAO.findOne(345).cadastrarInstrutor(instrutor1, (FuncionarioDAO) funcDAO);
-
-        System.out.println(funcDAO.findOne(789));
-        System.out.println(funcDAO.findOne(345));
-        System.out.println(funcDAO.findOne(346));
-
-        System.out.println(funcDAO.findOne(789));
-
-
-        /*System.out.println(func1);
-        System.out.println(func2);
-        System.out.println("alterando cpf func1");
-        func1.alterarFuncionario(1111);
-        System.out.println(func1);*/
 
 
         ////teste dao de alunos

@@ -1,6 +1,7 @@
 package com.company;
 
 import com.company.dao.AlunoDAO;
+import com.company.dao.ExercicioDAO;
 import com.company.dao.FuncionarioDAO;
 import com.company.interfaces.Entidade;
 
@@ -45,30 +46,37 @@ public class Funcionario implements Entidade<Integer> {
     public void adicionarAluno(Aluno aluno, AlunoDAO alunoDAO){
         // só estou passando o DAO para poder adicionar no mesmo DAO da main, com banco de dados não vai ter
         if(estadoFuncionario == Estado.INATIVO) return;
-        if(papel == Papel.INSTRUTOR) return;
+        if(papel != Papel.ADMIN) return;
         alunoDAO.insert(aluno);
     }
 
     public void atualizarAluno(Aluno aluno, AlunoDAO alunoDAO){
         // só estou passando o DAO para poder adicionar no mesmo DAO da main, com banco de dados não vai ter
         if(estadoFuncionario == Estado.INATIVO) return;
-        if(papel == Papel.INSTRUTOR) return;
+        if(papel != Papel.ADMIN) return;
         alunoDAO.update(aluno.getId(), aluno);
     }
 
     public void cadastrarInstrutor(Funcionario func, FuncionarioDAO funcDAO){
         // só estou passando o DAO para poder adicionar no mesmo DAO da main, com banco de dados não vai ter
-        if(estadoFuncionario == Estado.INATIVO) return;
-        if(papel == Papel.INSTRUTOR) return;
+        if(estadoFuncionario != Estado.ATIVO) return;
+        if(papel != Papel.ADMIN) return;
         funcDAO.insert(func);
     }
 
     public void atualizarInstrutor(Funcionario func, FuncionarioDAO funcDAO){
         // só estou passando o DAO para poder adicionar no mesmo DAO da main, com banco de dados não vai ter
-        if(estadoFuncionario == Estado.INATIVO) return;
-        if(papel == Papel.INSTRUTOR) return;
+        if(estadoFuncionario != Estado.ATIVO) return;
+        if(papel != Papel.ADMIN) return;
         if(func.getPapel() == Papel.ADMIN) return;
         funcDAO.update(func.getId(), func);
+    }
+
+    public void adicionarExercicio(Exercicio ex, ExercicioDAO exDAO){
+        // só estou passando o DAO para poder adicionar no mesmo DAO da main, com banco de dados não vai ter
+        if(estadoFuncionario != Estado.ATIVO) return;
+        if(papel != Papel.INSTRUTOR) return;
+        exDAO.insert(ex);
     }
 
     public Papel getPapel() {
