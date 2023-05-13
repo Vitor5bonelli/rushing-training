@@ -1,6 +1,7 @@
 package com.company;
 
 import com.company.dao.AlunoDAO;
+import com.company.dao.FuncionarioDAO;
 import com.company.interfaces.Entidade;
 
 import java.util.List;
@@ -46,6 +47,13 @@ public class Funcionario implements Entidade<Integer> {
         if(estadoFuncionario == Estado.INATIVO) return;
         if(papel == Papel.INSTRUTOR) return;
         alunoDAO.insert(aluno);
+    }
+
+    public void cadastrarInstrutor(Funcionario func, FuncionarioDAO funcDAO){
+        // só estou passando o DAO para poder adicionar no mesmo DAO da main, com banco de dados não vai ter
+        if(estadoFuncionario == Estado.INATIVO) return;
+        if(papel == Papel.INSTRUTOR) return;
+        funcDAO.insert(func);
     }
 
     @Override
