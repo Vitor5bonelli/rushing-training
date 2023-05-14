@@ -17,17 +17,13 @@ public class Main {
 
         System.out.println("______________________________funcionarios_______________________________");
         GenericDAO<Integer, Funcionario> funcDAO = new FuncionarioDAO();
-        Funcionario instrutor1 = new Funcionario(789, Papel.INSTRUTOR, "renato", "123", Estado.ATIVO);
-        Funcionario instrutor1_2 = new Funcionario(789,Papel.INSTRUTOR, "renato garcia", "123", Estado.ATIVO);
+        Funcionario instrutor1 = new Funcionario(789, Papel.INSTRUTOR, "renato", "senha123", Estado.ATIVO);
         Funcionario adm1 = new Funcionario(345,Papel.ADMIN, "melissa", "senha123", Estado.ATIVO);
-        Funcionario adm2 = new Funcionario(346,Papel.ADMIN, "melissa2", "senha123", Estado.ATIVO);
+        Funcionario adm2 = new Funcionario(346,Papel.ADMIN, "fred", "senha123", Estado.ATIVO);
 
         funcDAO.insert(adm1);
         funcDAO.insert(adm2);
-
-        //System.out.println(funcDAO.findOne(adm2.getId()) == null);
-
-        funcDAO.findOne(346).mudarEstado(Estado.INATIVO);
+        funcDAO.findOne(345).autenticar("senha123");
         funcDAO.findOne(345).cadastrarInstrutor(instrutor1, (FuncionarioDAO) funcDAO);
 
         funcDAO.findAll().values().forEach(System.out::println);
@@ -47,6 +43,9 @@ public class Main {
         Exercicio exercicio1 = new Exercicio("Agachamento", "Barra", 50, 100);
         Exercicio exercicio2 = new Exercicio("Supino", "Halteres", 20, 40);
         Exercicio exercicio3 = new Exercicio("Flexão de Braço", "Peso Corporal", 0, 0);
+
+
+        funcDAO.findOne(789).autenticar("senha123"); //login do instrutor
 
         funcDAO.findOne(789).adicionarExercicio(exercicio1, (ExercicioDAO) exDAO);
         funcDAO.findOne(789).adicionarExercicio(exercicio2, (ExercicioDAO) exDAO);
@@ -79,6 +78,9 @@ public class Main {
         Aluno aluno2 = new Aluno("123", "laura", 2345);
         Aluno aluno3 = new Aluno("123", "regina", 3456);
         Aluno aluno4 = new Aluno("123", "carlos", 4567);
+
+        funcDAO.findOne(345).autenticar("senha123"); //login do admin
+
         funcDAO.findOne(345).cadastrarAluno(aluno1, (AlunoDAO) alunoDAO);
         funcDAO.findOne(345).cadastrarAluno(aluno2, (AlunoDAO) alunoDAO);
         funcDAO.findOne(345).cadastrarAluno(aluno3, (AlunoDAO) alunoDAO);
