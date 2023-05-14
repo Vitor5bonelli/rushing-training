@@ -1,7 +1,6 @@
 package com.company.dao;
 
-import com.company.Aluno;
-import com.company.GenericDAO;
+import com.company.entities.Aluno;
 
 public class AlunoDAO extends GenericDAO<Integer, Aluno> {
 }

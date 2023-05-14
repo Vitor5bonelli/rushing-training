@@ -1,4 +1,4 @@
-package com.company;
+package com.company.entities;
 
 import com.company.interfaces.Entidade;
 
@@ -17,13 +17,13 @@ public class Exercicio implements Entidade<String> {
         this.pesoMax = pesoMax;
     }
 
-    public void editarExercicio(String aparelho, int pesoMin, int pesoMax) {
+    protected void editarExercicio(String aparelho, int pesoMin, int pesoMax) {
         this.aparelho = aparelho;
         this.pesoMin = pesoMin;
         this.pesoMax = pesoMax;
     }
 
-    public String getNOME() {
+    protected String getNOME() {
         return NOME;
     }
 

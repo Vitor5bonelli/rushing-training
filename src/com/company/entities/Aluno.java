@@ -1,6 +1,6 @@
-package com.company;
+package com.company.entities;
 
-import com.company.dao.AlunoDAO;
+import com.company.enums.Estado;
 import com.company.interfaces.Entidade;
 
 import java.time.LocalDate;

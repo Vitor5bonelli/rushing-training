@@ -1,7 +1,6 @@
 package com.company.dao;
 
-import com.company.Funcionario;
-import com.company.GenericDAO;
+import com.company.entities.Funcionario;
 
 public class FuncionarioDAO extends GenericDAO<Integer, Funcionario> {
 }

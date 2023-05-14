@@ -1,9 +1,12 @@
 package com.company;
 
-import com.company.dao.AlunoDAO;
-import com.company.dao.ExercicioDAO;
-import com.company.dao.FuncionarioDAO;
-import com.company.dao.TreinoDAO;
+import com.company.dao.*;
+import com.company.entities.Aluno;
+import com.company.entities.Exercicio;
+import com.company.entities.Funcionario;
+import com.company.entities.Treino;
+import com.company.enums.Estado;
+import com.company.enums.Papel;
 
 public class Main {
 
@@ -14,21 +17,20 @@ public class Main {
 
         System.out.println("______________________________funcionarios_______________________________");
         GenericDAO<Integer, Funcionario> funcDAO = new FuncionarioDAO();
-        Funcionario instrutor1 = new Funcionario(789,Papel.INSTRUTOR, "renato", "123", Estado.ATIVO);
+        Funcionario instrutor1 = new Funcionario(789, Papel.INSTRUTOR, "renato", "123", Estado.ATIVO);
         Funcionario instrutor1_2 = new Funcionario(789,Papel.INSTRUTOR, "renato garcia", "123", Estado.ATIVO);
         Funcionario adm1 = new Funcionario(345,Papel.ADMIN, "melissa", "senha123", Estado.ATIVO);
         Funcionario adm2 = new Funcionario(346,Papel.ADMIN, "melissa2", "senha123", Estado.ATIVO);
 
         funcDAO.insert(adm1);
         funcDAO.insert(adm2);
+
+        //System.out.println(funcDAO.findOne(adm2.getId()) == null);
+
         funcDAO.findOne(346).mudarEstado(Estado.INATIVO);
         funcDAO.findOne(345).cadastrarInstrutor(instrutor1, (FuncionarioDAO) funcDAO);
 
-        System.out.println(funcDAO.findOne(789));
-        System.out.println(funcDAO.findOne(345));
-        System.out.println(funcDAO.findOne(346));
-
-        System.out.println(funcDAO.findOne(789));
+        funcDAO.findAll().values().forEach(System.out::println);
 
 
         /*System.out.println(func1);
@@ -40,8 +42,8 @@ public class Main {
 
         System.out.println();
         //////teste dao de exercicios
-        System.out.println();
-        System.out.println("______________________________exercicios_______________________________");
+        System.out.println("\n______________________________exercicios_______________________________");
+
         Exercicio exercicio1 = new Exercicio("Agachamento", "Barra", 50, 100);
         Exercicio exercicio2 = new Exercicio("Supino", "Halteres", 20, 40);
         Exercicio exercicio3 = new Exercicio("Flexão de Braço", "Peso Corporal", 0, 0);
@@ -50,16 +52,10 @@ public class Main {
         funcDAO.findOne(789).adicionarExercicio(exercicio2, (ExercicioDAO) exDAO);
         funcDAO.findOne(789).adicionarExercicio(exercicio3, (ExercicioDAO) exDAO);
 
-        System.out.println();
-        System.out.println(exDAO.findOne("Agachamento"));
-        System.out.println(exDAO.findOne("Supino"));
-        System.out.println(exDAO.findOne("Flexão de Braço"));
-
-
+        exDAO.findAll().values().forEach(System.out::println);
 
         /////teste dao de treinos
-        System.out.println();
-        System.out.println("______________________________treinos_______________________________");
+        System.out.println("\n______________________________treinos_______________________________");
         treinoDAO.insert(new Treino("treino1"));
         treinoDAO.insert(new Treino("treino2"));
         treinoDAO.insert(new Treino("treino3"));
@@ -71,35 +67,29 @@ public class Main {
         treinoDAO.findOne("treino3").inserirExercicio("Agachamento", 20);
         treinoDAO.findOne("treino3").inserirExercicio("Flexão de Braço", 10);
 
-        System.out.println();
-        System.out.println(treinoDAO.findOne("treino1"));
-        System.out.println(treinoDAO.findOne("treino2"));
-        System.out.println(treinoDAO.findOne("treino3"));
+        treinoDAO.findAll().values().forEach(System.out::println);
+
 
 
         ////teste dao de alunos
-        System.out.println();
-        System.out.println("______________________________alunos_______________________________");
+        System.out.println("\n______________________________alunos_______________________________");
 
         GenericDAO<Integer, Aluno> alunoDAO = new AlunoDAO();
         Aluno aluno1 = new Aluno("123", "luiz", 1234);
         Aluno aluno2 = new Aluno("123", "laura", 2345);
         Aluno aluno3 = new Aluno("123", "regina", 3456);
         Aluno aluno4 = new Aluno("123", "carlos", 4567);
-        funcDAO.findOne(345).adicionarAluno(aluno1, (AlunoDAO) alunoDAO);
-        funcDAO.findOne(345).adicionarAluno(aluno2, (AlunoDAO) alunoDAO);
-        funcDAO.findOne(345).adicionarAluno(aluno3, (AlunoDAO) alunoDAO);
-        funcDAO.findOne(345).adicionarAluno(aluno4, (AlunoDAO) alunoDAO);
+        funcDAO.findOne(345).cadastrarAluno(aluno1, (AlunoDAO) alunoDAO);
+        funcDAO.findOne(345).cadastrarAluno(aluno2, (AlunoDAO) alunoDAO);
+        funcDAO.findOne(345).cadastrarAluno(aluno3, (AlunoDAO) alunoDAO);
+        funcDAO.findOne(345).cadastrarAluno(aluno4, (AlunoDAO) alunoDAO);
 
         aluno4.setNome("carlos antonio");
 
         funcDAO.findOne(345).atualizarAluno(aluno4, (AlunoDAO) alunoDAO);
 
 
-        System.out.println(alunoDAO.findOne(1234));
-        System.out.println(alunoDAO.findOne(2345));
-        System.out.println(alunoDAO.findOne(3456));
-        System.out.println(alunoDAO.findOne(4567));
+        alunoDAO.findAll().values().forEach(System.out::println);
 
     }
 }

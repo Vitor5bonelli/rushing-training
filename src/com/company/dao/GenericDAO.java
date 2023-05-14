@@ -1,4 +1,4 @@
-package com.company;
+package com.company.dao;
 
 import com.company.interfaces.Entidade;
 
@@ -9,6 +9,7 @@ public abstract class GenericDAO<K, T extends Entidade<K>> {
     protected Map<K, T> bancoDeDados = new HashMap<>();
 
     public void insert(T object) {
+        if(findOne(object.getId()) != null) return;
         bancoDeDados.put(object.getId(), object);
     }
 

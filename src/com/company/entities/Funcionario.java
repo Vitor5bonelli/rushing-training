@@ -1,8 +1,10 @@
-package com.company;
+package com.company.entities;
 
 import com.company.dao.AlunoDAO;
 import com.company.dao.ExercicioDAO;
 import com.company.dao.FuncionarioDAO;
+import com.company.enums.Estado;
+import com.company.enums.Papel;
 import com.company.interfaces.Entidade;
 
 import java.util.List;
@@ -43,7 +45,7 @@ public class Funcionario implements Entidade<Integer> {
         estadoFuncionario = estado;
     }
 
-    public void adicionarAluno(Aluno aluno, AlunoDAO alunoDAO){
+    public void cadastrarAluno(Aluno aluno, AlunoDAO alunoDAO){
         // só estou passando o DAO para poder adicionar no mesmo DAO da main, com banco de dados não vai ter
         if(estadoFuncionario == Estado.INATIVO) return;
         if(papel != Papel.ADMIN) return;
@@ -77,6 +79,13 @@ public class Funcionario implements Entidade<Integer> {
         if(estadoFuncionario != Estado.ATIVO) return;
         if(papel != Papel.INSTRUTOR) return;
         exDAO.insert(ex);
+    }
+
+    public void atualizarExercicio(Exercicio ex, ExercicioDAO exDAO){
+        // só estou passando o DAO para poder adicionar no mesmo DAO da main, com banco de dados não vai ter
+        if(estadoFuncionario != Estado.ATIVO) return;
+        if(papel != Papel.INSTRUTOR) return;
+        exDAO.update(ex.getId(), ex);
     }
 
     public Papel getPapel() {
