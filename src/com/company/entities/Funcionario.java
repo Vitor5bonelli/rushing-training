@@ -3,6 +3,7 @@ package com.company.entities;
 import com.company.dao.AlunoDAO;
 import com.company.dao.ExercicioDAO;
 import com.company.dao.FuncionarioDAO;
+import com.company.dao.TreinoDAO;
 import com.company.enums.Estado;
 import com.company.enums.Papel;
 import com.company.interfaces.Entidade;
@@ -123,5 +124,30 @@ public class Funcionario implements Entidade<Integer> {
     @Override
     public Integer getId() {
         return cpf;
+    }
+
+    public void adicionarTreino(Treino treino, TreinoDAO treinoDAO){
+        if(estadoFuncionario != Estado.ATIVO) return;
+        if(papel != Papel.ADMIN) return;
+        if(!(this.getId().equals(idAutenticado))) return;
+        treinoDAO.insert(treino);
+    }
+
+    public void atualizarTreino(Treino novoTreino, TreinoDAO treinoDAO){
+        if(estadoFuncionario != Estado.ATIVO) return;
+        if(papel != Papel.INSTRUTOR) return;
+        if(!(this.getId().equals(idAutenticado))) return;
+        treinoDAO.update(novoTreino.getId(), novoTreino);
+    }
+
+    public void excluirTreino(String nomeTreino, TreinoDAO treinoDAO){
+        if(estadoFuncionario != Estado.ATIVO) return;
+        if(papel != Papel.INSTRUTOR) return;
+        if(!(this.getId().equals(idAutenticado))) return;
+        treinoDAO.remove(nomeTreino);
+    }
+
+    public void vincularTreinoAoAluno(int cpfAluno, String nomeTreino){
+
     }
 }
