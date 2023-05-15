@@ -55,20 +55,24 @@ public class Main {
 
         /////teste dao de treinos
         System.out.println("\n______________________________treinos_______________________________");
-        treinoDAO.insert(new Treino("treino1"));
-        treinoDAO.insert(new Treino("treino2"));
-        treinoDAO.insert(new Treino("treino3"));
+
+        Treino treino1 = new Treino("treino1");
+        Treino treino2 = new Treino("treino2");
+        Treino treino3 = new Treino("treino3");
+
+        funcDAO.findOne(789).autenticar("senha123"); //login do instrutor
+
+        funcDAO.findOne(789).adicionarTreino(treino1, (TreinoDAO) treinoDAO);
+        funcDAO.findOne(789).adicionarTreino(treino2, (TreinoDAO) treinoDAO);
+        funcDAO.findOne(789).adicionarTreino(treino3, (TreinoDAO) treinoDAO);
 
         treinoDAO.findOne("treino1").inserirExercicio("Agachamento", 20);
-
         treinoDAO.findOne("treino2").inserirExercicio("Supino", 15);
         treinoDAO.findOne("treino2").inserirExercicio("Flexão de Braço", 10);
         treinoDAO.findOne("treino3").inserirExercicio("Agachamento", 20);
         treinoDAO.findOne("treino3").inserirExercicio("Flexão de Braço", 10);
 
         treinoDAO.findAll().values().forEach(System.out::println);
-
-
 
         ////teste dao de alunos
         System.out.println("\n______________________________alunos_______________________________");

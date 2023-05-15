@@ -128,7 +128,7 @@ public class Funcionario implements Entidade<Integer> {
 
     public void adicionarTreino(Treino treino, TreinoDAO treinoDAO){
         if(estadoFuncionario != Estado.ATIVO) return;
-        if(papel != Papel.ADMIN) return;
+        if(papel != Papel.INSTRUTOR) return;
         if(!(this.getId().equals(idAutenticado))) return;
         treinoDAO.insert(treino);
     }
@@ -145,9 +145,5 @@ public class Funcionario implements Entidade<Integer> {
         if(papel != Papel.INSTRUTOR) return;
         if(!(this.getId().equals(idAutenticado))) return;
         treinoDAO.remove(nomeTreino);
-    }
-
-    public void vincularTreinoAoAluno(int cpfAluno, String nomeTreino){
-
     }
 }
