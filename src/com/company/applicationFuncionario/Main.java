@@ -81,7 +81,7 @@ public class Main{
         aluno4.setNome("carlos antonio");
 
         funcDAO.findOne(345).atualizarAluno(aluno4, (AlunoDAO) alunoDAO);
-        
+
         alunoDAO.findAll().values().forEach(System.out::println);
 
     }

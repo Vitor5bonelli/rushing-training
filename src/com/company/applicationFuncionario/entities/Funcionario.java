@@ -105,26 +105,6 @@ public class Funcionario implements Entidade<Integer> {
         exDAO.update(ex.getId(), ex);
     }
 
-    public Papel getPapel() {
-        return papel;
-    }
-
-    @Override
-    public String toString() {
-        return "Funcionario{" +
-                "nome='" + nome +
-                ", cpf=" + cpf +
-                ", senha='" + senha +
-                ", papel=" + papel +
-                ", estado=" + estadoFuncionario +
-                '}';
-    }
-
-    @Override
-    public Integer getId() {
-        return cpf;
-    }
-
     public void adicionarTreino(Treino treino, TreinoDAO treinoDAO){
         if(estadoFuncionario != Estado.ATIVO) return;
         if(papel != Papel.INSTRUTOR) return;
@@ -144,5 +124,25 @@ public class Funcionario implements Entidade<Integer> {
         if(papel != Papel.INSTRUTOR) return;
         if(!(this.getId().equals(idAutenticado))) return;
         treinoDAO.remove(nomeTreino);
+    }
+
+    public Papel getPapel() {
+        return papel;
+    }
+
+    @Override
+    public Integer getId() {
+        return cpf;
+    }
+
+    @Override
+    public String toString() {
+        return "Funcionario{" +
+                "nome='" + nome +
+                ", cpf=" + cpf +
+                ", senha='" + senha +
+                ", papel=" + papel +
+                ", estado=" + estadoFuncionario +
+                '}';
     }
 }
