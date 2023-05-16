@@ -1,6 +1,6 @@
 package com.company.dao;
 
-import com.company.entities.Treino;
+import com.company.applicationFuncionario.entities.Treino;
 
 public class TreinoDAO extends GenericDAO<String, Treino> {
 }

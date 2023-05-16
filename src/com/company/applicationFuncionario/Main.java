@@ -1,14 +1,14 @@
-package com.company;
+package com.company.applicationFuncionario;
 
 import com.company.dao.*;
-import com.company.entities.Aluno;
-import com.company.entities.Exercicio;
-import com.company.entities.Funcionario;
-import com.company.entities.Treino;
+import com.company.applicationFuncionario.entities.Aluno;
+import com.company.applicationFuncionario.entities.Exercicio;
+import com.company.applicationFuncionario.entities.Funcionario;
+import com.company.applicationFuncionario.entities.Treino;
 import com.company.enums.Estado;
 import com.company.enums.Papel;
 
-public class Main {
+public class Main{
 
     public static void main(String[] args) {
 
@@ -28,16 +28,6 @@ public class Main {
 
         funcDAO.findAll().values().forEach(System.out::println);
 
-
-        /*System.out.println(func1);
-        System.out.println(func2);
-        System.out.println("alterando cpf func1");
-        func1.alterarFuncionario(1111);
-        System.out.println(func1);*/
-
-
-        System.out.println();
-        //////teste dao de exercicios
         System.out.println("\n______________________________exercicios_______________________________");
 
         Exercicio exercicio1 = new Exercicio("Agachamento", "Barra", 50, 100);
@@ -53,7 +43,6 @@ public class Main {
 
         exDAO.findAll().values().forEach(System.out::println);
 
-        /////teste dao de treinos
         System.out.println("\n______________________________treinos_______________________________");
 
         Treino treino1 = new Treino("treino1");
@@ -74,7 +63,6 @@ public class Main {
 
         treinoDAO.findAll().values().forEach(System.out::println);
 
-        ////teste dao de alunos
         System.out.println("\n______________________________alunos_______________________________");
 
         GenericDAO<Integer, Aluno> alunoDAO = new AlunoDAO();
@@ -93,8 +81,7 @@ public class Main {
         aluno4.setNome("carlos antonio");
 
         funcDAO.findOne(345).atualizarAluno(aluno4, (AlunoDAO) alunoDAO);
-
-
+        
         alunoDAO.findAll().values().forEach(System.out::println);
 
     }

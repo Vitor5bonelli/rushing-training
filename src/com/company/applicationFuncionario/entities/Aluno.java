@@ -1,4 +1,4 @@
-package com.company.entities;
+package com.company.applicationFuncionario.entities;
 
 import com.company.enums.Estado;
 import com.company.interfaces.Entidade;

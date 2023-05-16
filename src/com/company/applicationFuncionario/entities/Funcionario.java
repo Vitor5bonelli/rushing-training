@@ -1,4 +1,4 @@
-package com.company.entities;
+package com.company.applicationFuncionario.entities;
 
 import com.company.dao.AlunoDAO;
 import com.company.dao.ExercicioDAO;
@@ -9,7 +9,6 @@ import com.company.enums.Papel;
 import com.company.interfaces.Entidade;
 
 import java.util.List;
-import java.util.Optional;
 
 public class Funcionario implements Entidade<Integer> {
     //private String usuario; o usuario pode ser o cpf, nome ou email
