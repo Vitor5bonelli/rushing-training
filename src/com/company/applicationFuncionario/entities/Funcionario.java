@@ -1,5 +1,6 @@
 package com.company.applicationFuncionario.entities;
 
+import com.company.CPF;
 import com.company.dao.AlunoDAO;
 import com.company.dao.ExercicioDAO;
 import com.company.dao.FuncionarioDAO;
@@ -8,26 +9,26 @@ import com.company.enums.Estado;
 import com.company.enums.Cargo;
 import com.company.interfaces.Entidade;
 
-public class Funcionario implements Entidade<Integer> {
+public class Funcionario implements Entidade<String> {
     //private String usuario; o usuario pode ser o cpf, nome ou email
-    private int cpf;
+    private CPF cpf;
     private String senha;
     private String nome;
     private String telefone;
     private Cargo cargo;
     private Estado estadoFuncionario;
-    private static Integer idAutenticado;
+    private static CPF idAutenticado;
 
     public void autenticar(String senha){
-        if(this.senha == senha) idAutenticado = getId();
+        if(this.senha == senha) idAutenticado = getCPF();
     }
 
-    public static Integer getIdAutenticado(){
+    public static CPF getIdAutenticado(){
         return idAutenticado;
     }
 
-    public Funcionario(int cpf, Cargo cargo, String nome, String senha, Estado estado) { //falta colocar mais parâmetros só
-        this.cpf = cpf;
+    public Funcionario(String cpf, Cargo cargo, String nome, String senha, Estado estado) { //falta colocar mais parâmetros só
+        this.cpf = new CPF(cpf);
         this.cargo = cargo;
         this.senha = senha;
         this.nome = nome;
@@ -37,8 +38,7 @@ public class Funcionario implements Entidade<Integer> {
     public boolean verificarAcesso(Cargo cargoEsperado){
         if(estadoFuncionario != Estado.ATIVO) return false;
         if(cargo != cargoEsperado) return false;
-        if(!(this.getId().equals(idAutenticado))) return false;
-        return true;
+        return cpf.equals(idAutenticado);
     }
 
     public void mudarEstado(Estado estado){
@@ -97,20 +97,24 @@ public class Funcionario implements Entidade<Integer> {
         treinoDAO.remove(nomeTreino);
     }
 
+    private CPF getCPF(){
+        return cpf;
+    }
+
     public Cargo getCargo() {
         return cargo;
     }
 
     @Override
-    public Integer getId() {
-        return cpf;
+    public String getId() {
+        return cpf.getCpf();
     }
 
     @Override
     public String toString() {
         return "Funcionario{" +
                 "nome='" + nome + '\'' +
-                ", cpf=" + cpf +
+                ", cpf=" + cpf.getCpf() +
                 ", senha='" + senha + '\'' +
                 ", papel=" + cargo +
                 ", estado=" + estadoFuncionario +
