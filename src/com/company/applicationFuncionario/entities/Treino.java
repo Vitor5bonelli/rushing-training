@@ -19,12 +19,6 @@ public class Treino implements Entidade<String> {
         exercicios.put(nomeExercicio, repeticoes);
     }
 
-    //public boolean excluirTreino() --- nao faz sentido ele estar nessa classe
-
-    //public boolean editarTreino() --- qual o sentido da funcao?? edita o treino pelos sets
-
-    //implementações extras para melhorar o funcionamento do codigo
-
     public String getNome() {
         return NOME;
     }

@@ -1,12 +1,13 @@
 package com.company.applicationFuncionario;
 
+import com.company.CPF;
 import com.company.dao.*;
 import com.company.applicationFuncionario.entities.Aluno;
 import com.company.applicationFuncionario.entities.Exercicio;
 import com.company.applicationFuncionario.entities.Funcionario;
 import com.company.applicationFuncionario.entities.Treino;
 import com.company.enums.Estado;
-import com.company.enums.Papel;
+import com.company.enums.Cargo;
 
 public class Main{
 
@@ -17,9 +18,9 @@ public class Main{
 
         System.out.println("______________________________funcionarios_______________________________");
         GenericDAO<Integer, Funcionario> funcDAO = new FuncionarioDAO();
-        Funcionario instrutor1 = new Funcionario(789, Papel.INSTRUTOR, "renato", "senha123", Estado.ATIVO);
-        Funcionario adm1 = new Funcionario(345,Papel.ADMIN, "melissa", "senha123", Estado.ATIVO);
-        Funcionario adm2 = new Funcionario(346,Papel.ADMIN, "fred", "senha123", Estado.ATIVO);
+        Funcionario instrutor1 = new Funcionario(789, Cargo.INSTRUTOR, "renato", "senha123", Estado.ATIVO);
+        Funcionario adm1 = new Funcionario(345, Cargo.ADMIN, "melissa", "senha123", Estado.ATIVO);
+        Funcionario adm2 = new Funcionario(346, Cargo.ADMIN, "fred", "senha123", Estado.ATIVO);
 
         funcDAO.insert(adm1);
         funcDAO.insert(adm2);
@@ -83,6 +84,13 @@ public class Main{
         funcDAO.findOne(345).atualizarAluno(aluno4, (AlunoDAO) alunoDAO);
 
         alunoDAO.findAll().values().forEach(System.out::println);
+
+        System.out.println("\n______________________________teste CPF_______________________________");
+        CPF cpf = new CPF("416.598.798-00");
+        if (cpf.validarCPF())
+            System.out.println("válido");
+        else
+            System.out.println("inválido");
 
     }
 }
