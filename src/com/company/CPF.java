@@ -1,5 +1,7 @@
 package com.company;
 
+import java.util.Objects;
+
 public class CPF {
     private String cpf;
 
@@ -45,4 +47,13 @@ public class CPF {
     public String getCpf() {
         return cpf;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CPF cpf1 = (CPF) o;
+        return Objects.equals(cpf, cpf1.cpf);
+    }
+
 }
