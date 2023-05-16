@@ -24,7 +24,7 @@ public class Aluno implements Entidade<Integer> {
         this.nome = nome;
     }
 
-    public Aluno(String senha, String nome, int cpf) {
+    public Aluno(String senha, String nome, int cpf) { // tem que adiiconar mais paramentro só
         this.senha = senha;
         this.nome = nome;
         this.cpf = cpf;

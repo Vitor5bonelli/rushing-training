@@ -11,7 +11,7 @@ public class Treino implements Entidade<String> {
     private final Map<String, Integer> exercicios = new HashMap<>();
     private int repeticaoTreino;//? nao entendi
 
-    public Treino(String nome) {
+    public Treino(String nome) { //falta parametro
         this.NOME = nome;
     }
 
