@@ -1,10 +1,7 @@
 package com.company.applicationFuncionario.entities;
 
 import com.company.CPF;
-import com.company.dao.AlunoDAO;
-import com.company.dao.ExercicioDAO;
-import com.company.dao.FuncionarioDAO;
-import com.company.dao.TreinoDAO;
+import com.company.dao.*;
 import com.company.enums.Estado;
 import com.company.enums.Cargo;
 import com.company.interfaces.Entidade;
@@ -95,6 +92,18 @@ public class Funcionario implements Entidade<String> {
     public void excluirTreino(String nomeTreino, TreinoDAO treinoDAO){
         if (!verificarAcesso(Cargo.INSTRUTOR)) return;
         treinoDAO.remove(nomeTreino);
+    }
+
+    public void vincularTreinoAoAluno(String cpfAluno, String nomeTreino, TreinoAlunoDAO treinoAlunoDAO){
+        if (!verificarAcesso(Cargo.INSTRUTOR)) return;
+        CPF cpf = new CPF(cpfAluno);
+        treinoAlunoDAO.insert(new TreinoAluno(cpf, nomeTreino));
+    }
+
+    public void desvincularTreinoAoAluno(String cpfAluno, String nomeTreino, TreinoAlunoDAO treinoAlunoDAO){
+        if (!verificarAcesso(Cargo.INSTRUTOR)) return;
+        CPF cpf = new CPF(cpfAluno);
+        treinoAlunoDAO.remove(cpf, nomeTreino);
     }
 
     private CPF getCPF(){

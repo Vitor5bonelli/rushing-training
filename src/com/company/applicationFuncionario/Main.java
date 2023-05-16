@@ -15,9 +15,12 @@ public class Main{
 
         GenericDAO<String, Exercicio> exDAO = new ExercicioDAO();
         GenericDAO<String, Treino> treinoDAO = new TreinoDAO();
+        GenericDAO<String, Funcionario> funcDAO = new FuncionarioDAO();
+        GenericDAO<String, Aluno> alunoDAO = new AlunoDAO();
+        TreinoAlunoDAO treinoAlunoDAO = new TreinoAlunoDAO();
+
 
         System.out.println("______________________________funcionarios_______________________________");
-        GenericDAO<String, Funcionario> funcDAO = new FuncionarioDAO();
         Funcionario instrutor1 = new Funcionario("55638129529", Cargo.INSTRUTOR, "renato", "senha123", Estado.ATIVO);
         Funcionario adm1 = new Funcionario("18276727140", Cargo.ADMIN, "melissa", "senha123", Estado.ATIVO);
         Funcionario adm2 = new Funcionario("41911467930", Cargo.ADMIN, "fred", "senha123", Estado.ATIVO);
@@ -67,7 +70,6 @@ public class Main{
 
         System.out.println("\n______________________________alunos_______________________________");
 
-        GenericDAO<String, Aluno> alunoDAO = new AlunoDAO();
         Aluno aluno1 = new Aluno("123", "luiz", "43149910706");
         Aluno aluno2 = new Aluno("123", "laura", "37984078785");
         Aluno aluno3 = new Aluno("123", "regina", "66454801055");
@@ -85,5 +87,22 @@ public class Main{
         funcDAO.findOne("18276727140").atualizarAluno(aluno4, (AlunoDAO) alunoDAO);
 
         alunoDAO.findAll().values().forEach(System.out::println);
+
+        System.out.println("\n___________________________vinculando treinos____________________________");
+
+        funcDAO.findOne("55638129529").autenticar("senha123");
+
+        funcDAO.findOne("55638129529")
+                .vincularTreinoAoAluno("43149910706", "treino1", treinoAlunoDAO);
+        funcDAO.findOne("55638129529")
+                .vincularTreinoAoAluno("43149910706", "treino3", treinoAlunoDAO);
+
+        funcDAO.findOne("55638129529")
+                .vincularTreinoAoAluno("37984078785", "treino2", treinoAlunoDAO);
+
+        treinoAlunoDAO.findTreinosAluno("43149910706").forEach(System.out::println);
+        System.out.println();
+        treinoAlunoDAO.findTreinosAluno("37984078785").forEach(System.out::println);
+
     }
 }
