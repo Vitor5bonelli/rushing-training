@@ -1,4 +1,4 @@
-package com.company.entities;
+package com.company.applicationFuncionario.entities;
 
 import com.company.interfaces.Entidade;
 
@@ -18,12 +18,6 @@ public class Treino implements Entidade<String> {
     public void inserirExercicio(String nomeExercicio, int repeticoes){
         exercicios.put(nomeExercicio, repeticoes);
     }
-
-    //public boolean excluirTreino() --- nao faz sentido ele estar nessa classe
-
-    //public boolean editarTreino() --- qual o sentido da funcao?? edita o treino pelos sets
-
-    //implementações extras para melhorar o funcionamento do codigo
 
     public String getNome() {
         return NOME;

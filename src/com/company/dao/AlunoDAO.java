@@ -1,6 +1,6 @@
 package com.company.dao;
 
-import com.company.entities.Aluno;
+import com.company.applicationFuncionario.entities.Aluno;
 
-public class AlunoDAO extends GenericDAO<Integer, Aluno> {
+public class AlunoDAO extends GenericDAO<String, Aluno> {
 }
