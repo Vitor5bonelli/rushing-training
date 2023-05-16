@@ -19,16 +19,11 @@ public class Aluno implements Entidade<String> {
     private float altura;
     private Estado estadoAluno;
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
     public Aluno(String senha, String nome, String cpf) {
         this.cpf = new CPF(cpf);
         this.senha = senha;
         this.nome = nome;
     }
-    // treino
 
     public void inativarAluno(){
         estadoAluno = Estado.INATIVO;
@@ -38,6 +33,9 @@ public class Aluno implements Entidade<String> {
         estadoAluno = Estado.ATIVO;
     }
 
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
     @Override
     public String getId() {

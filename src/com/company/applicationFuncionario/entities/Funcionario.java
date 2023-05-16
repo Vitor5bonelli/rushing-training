@@ -9,27 +9,27 @@ import com.company.interfaces.Entidade;
 public class Funcionario implements Entidade<String> {
     //private String usuario; o usuario pode ser o cpf, nome ou email
     private CPF cpf;
-    private String senha;
+    private int hashSenha;
     private String nome;
     private String telefone;
     private Cargo cargo;
     private Estado estadoFuncionario;
     private static CPF idAutenticado;
 
+    public Funcionario(String cpf, Cargo cargo, String nome, String senha, Estado estado) { //falta colocar mais parâmetros só
+        this.cpf = new CPF(cpf);
+        this.cargo = cargo;
+        this.nome = nome;
+        this.estadoFuncionario = estado;
+        hashSenha = senha.hashCode();
+    }
+
     public void autenticar(String senha){
-        if(this.senha == senha) idAutenticado = getCPF();
+        if(hashSenha == senha.hashCode()) idAutenticado = getCPF();
     }
 
     public static CPF getIdAutenticado(){
         return idAutenticado;
-    }
-
-    public Funcionario(String cpf, Cargo cargo, String nome, String senha, Estado estado) { //falta colocar mais parâmetros só
-        this.cpf = new CPF(cpf);
-        this.cargo = cargo;
-        this.senha = senha;
-        this.nome = nome;
-        this.estadoFuncionario = estado;
     }
 
     public boolean verificarAcesso(Cargo cargoEsperado){
@@ -124,7 +124,7 @@ public class Funcionario implements Entidade<String> {
         return "Funcionario{" +
                 "nome='" + nome + '\'' +
                 ", cpf=" + cpf.getCpf() +
-                ", senha='" + senha + '\'' +
+                ", senha='" + hashSenha + '\'' +
                 ", papel=" + cargo +
                 ", estado=" + estadoFuncionario +
                 '}';
