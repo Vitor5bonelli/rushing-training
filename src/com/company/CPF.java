@@ -3,12 +3,14 @@ package com.company;
 public class CPF {
     private String cpf;
 
-    public CPF(String cpf) {
+    public CPF(String cpf) throws IllegalArgumentException {
+        if (!validarCPF(cpf))
+            throw new IllegalArgumentException("CPF inválido");
         this.cpf = cpf;
     }
 
-    public boolean validarCPF() {
-        String cpf = this.cpf.replaceAll("[^0-9]", "");
+    public boolean validarCPF(String cpf) {
+        cpf = cpf.replaceAll("[^0-9]", "");
 
         if (cpf.length() != 11) {
             return false;
@@ -38,5 +40,9 @@ public class CPF {
 
         return (Character.getNumericValue(cpf.charAt(9)) == digito1
                 && Character.getNumericValue(cpf.charAt(10)) == digito2);
+    }
+
+    public String getCpf() {
+        return cpf;
     }
 }

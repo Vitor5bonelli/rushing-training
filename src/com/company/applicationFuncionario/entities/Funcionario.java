@@ -8,8 +8,6 @@ import com.company.enums.Estado;
 import com.company.enums.Cargo;
 import com.company.interfaces.Entidade;
 
-import java.util.List;
-
 public class Funcionario implements Entidade<Integer> {
     //private String usuario; o usuario pode ser o cpf, nome ou email
     private int cpf;
@@ -36,13 +34,11 @@ public class Funcionario implements Entidade<Integer> {
         this.estadoFuncionario = estado;
     }
 
-    public int getCpf() {
-        return cpf;
-    }
-
-    public boolean verificarAdmin(){
-        if (estadoFuncionario == Estado.INATIVO) return false;
-        return cargo == Cargo.ADMIN;
+    public boolean verificarAcesso(Cargo cargoEsperado){
+        if(estadoFuncionario != Estado.ATIVO) return false;
+        if(cargo != cargoEsperado) return false;
+        if(!(this.getId().equals(idAutenticado))) return false;
+        return true;
     }
 
     public void mudarEstado(Estado estado){
@@ -51,75 +47,57 @@ public class Funcionario implements Entidade<Integer> {
 
     public void cadastrarAluno(Aluno aluno, AlunoDAO alunoDAO){
         // só estou passando o DAO para poder adicionar no mesmo DAO da main, com banco de dados não vai ter
-        if(estadoFuncionario != Estado.ATIVO) return;
-        if(cargo != Cargo.ADMIN) return;
-        if(!(this.getId().equals(idAutenticado))) return;
+        if (!verificarAcesso(Cargo.ADMIN)) return;
         alunoDAO.insert(aluno);
     }
 
     public void atualizarAluno(Aluno aluno, AlunoDAO alunoDAO){
         // só estou passando o DAO para poder adicionar no mesmo DAO da main, com banco de dados não vai ter
-        if(estadoFuncionario != Estado.ATIVO) return;
-        if(cargo != Cargo.ADMIN) return;
-        if(!(this.getId().equals(idAutenticado))) return;
+        if (!verificarAcesso(Cargo.ADMIN)) return;
         alunoDAO.update(aluno.getId(), aluno);
     }
 
     public void cadastrarInstrutor(Funcionario func, FuncionarioDAO funcDAO){
         // só estou passando o DAO para poder adicionar no mesmo DAO da main, com banco de dados não vai ter
-        if(estadoFuncionario != Estado.ATIVO) return;
-        if(cargo != Cargo.ADMIN) return;
-        if(!(this.getId().equals(idAutenticado))) return;
+        if (!verificarAcesso(Cargo.ADMIN)) return;
         funcDAO.insert(func);
     }
 
     public void atualizarInstrutor(Funcionario func, FuncionarioDAO funcDAO){
         // só estou passando o DAO para poder adicionar no mesmo DAO da main, com banco de dados não vai ter
-        if(estadoFuncionario != Estado.ATIVO) return;
-        if(cargo != Cargo.ADMIN) return;
-        if(func.getPapel() == Cargo.ADMIN) return;
-        if(!(this.getId().equals(idAutenticado))) return;
+        if (!verificarAcesso(Cargo.ADMIN)) return;
+        if(func.getCargo() == Cargo.ADMIN) return;
         funcDAO.update(func.getId(), func);
     }
 
     public void adicionarExercicio(Exercicio ex, ExercicioDAO exDAO){
         // só estou passando o DAO para poder adicionar no mesmo DAO da main, com banco de dados não vai ter
-        if(estadoFuncionario != Estado.ATIVO) return;
-        if(cargo != Cargo.INSTRUTOR) return;
-        if(!(this.getId().equals(idAutenticado))) return;
+        if (!verificarAcesso(Cargo.INSTRUTOR)) return;
         exDAO.insert(ex);
     }
 
     public void atualizarExercicio(Exercicio ex, ExercicioDAO exDAO){
         // só estou passando o DAO para poder adicionar no mesmo DAO da main, com banco de dados não vai ter
-        if(estadoFuncionario != Estado.ATIVO) return;
-        if(cargo != Cargo.INSTRUTOR) return;
-        if(!(this.getId().equals(idAutenticado))) return;
+        if (!verificarAcesso(Cargo.INSTRUTOR)) return;
         exDAO.update(ex.getId(), ex);
     }
 
     public void adicionarTreino(Treino treino, TreinoDAO treinoDAO){
-        if(estadoFuncionario != Estado.ATIVO) return;
-        if(cargo != Cargo.INSTRUTOR) return;
-        if(!(this.getId().equals(idAutenticado))) return;
+        if (!verificarAcesso(Cargo.INSTRUTOR)) return;
         treinoDAO.insert(treino);
     }
 
     public void atualizarTreino(Treino novoTreino, TreinoDAO treinoDAO){
-        if(estadoFuncionario != Estado.ATIVO) return;
-        if(cargo != Cargo.INSTRUTOR) return;
-        if(!(this.getId().equals(idAutenticado))) return;
+        if (!verificarAcesso(Cargo.INSTRUTOR)) return;
         treinoDAO.update(novoTreino.getId(), novoTreino);
     }
 
     public void excluirTreino(String nomeTreino, TreinoDAO treinoDAO){
-        if(estadoFuncionario != Estado.ATIVO) return;
-        if(cargo != Cargo.INSTRUTOR) return;
-        if(!(this.getId().equals(idAutenticado))) return;
+        if (!verificarAcesso(Cargo.INSTRUTOR)) return;
         treinoDAO.remove(nomeTreino);
     }
 
-    public Cargo getPapel() {
+    public Cargo getCargo() {
         return cargo;
     }
 
@@ -131,9 +109,9 @@ public class Funcionario implements Entidade<Integer> {
     @Override
     public String toString() {
         return "Funcionario{" +
-                "nome='" + nome +
+                "nome='" + nome + '\'' +
                 ", cpf=" + cpf +
-                ", senha='" + senha +
+                ", senha='" + senha + '\'' +
                 ", papel=" + cargo +
                 ", estado=" + estadoFuncionario +
                 '}';

@@ -86,11 +86,6 @@ public class Main{
         alunoDAO.findAll().values().forEach(System.out::println);
 
         System.out.println("\n______________________________teste CPF_______________________________");
-        CPF cpf = new CPF("416.598.798-00");
-        if (cpf.validarCPF())
-            System.out.println("válido");
-        else
-            System.out.println("inválido");
-
+        CPF cpf = new CPF("416.598.798-09");
     }
 }
