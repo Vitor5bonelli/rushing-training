@@ -5,8 +5,9 @@ import com.company.applicationFuncionario.entities.TreinoAluno;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-public class TreinoAlunoDAO {
+public class TreinoAlunoDAO{
     protected List<TreinoAluno> bancoDeDados = new ArrayList<>();
 
     public void insert(TreinoAluno treinoAluno) {

@@ -6,13 +6,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Treino implements Entidade<String> {
-    private final String NOME;
+    private final String nome;
     private String descricao;
     private final Map<String, Integer> exercicios = new HashMap<>();
     private int repeticaoTreino;//? nao entendi
 
     public Treino(String nome) { //falta parametro
-        this.NOME = nome;
+        this.nome = nome;
     }
 
     public void inserirExercicio(String nomeExercicio, int repeticoes){
@@ -20,7 +20,7 @@ public class Treino implements Entidade<String> {
     }
 
     public String getNome() {
-        return NOME;
+        return nome;
     }
 
     public void excluirExercicio(String exercicio){
@@ -28,7 +28,7 @@ public class Treino implements Entidade<String> {
     }
 
     public void mudarRepeticoes(String exercicio, int repeticoes){
-        exercicios.put(NOME, repeticoes);
+        exercicios.put(nome, repeticoes);
     }
 
     public String listarExercicios(){
@@ -40,15 +40,18 @@ public class Treino implements Entidade<String> {
     @Override
     public String toString() {
         return "Treino{" +
-                "nome='" + NOME + '\'' +
+                "nome='" + nome + '\'' +
                 ", descricao='" + descricao + '\'' +
                 ", repeticaoTreino=" + repeticaoTreino +
                 ", exercicios:" + listarExercicios() + '}';
-
     }
 
     @Override
     public String getId() {
-        return NOME;
+        return nome;
+    }
+
+    public Map<String, Integer> getExercicios() {
+        return exercicios;
     }
 }

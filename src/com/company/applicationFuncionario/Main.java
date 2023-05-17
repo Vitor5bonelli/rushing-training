@@ -1,13 +1,13 @@
 package com.company.applicationFuncionario;
 
 import com.company.CPF;
+import com.company.applicationAluno.usecases.ControlarTreinoVinculado;
+import com.company.applicationFuncionario.entities.*;
 import com.company.dao.*;
-import com.company.applicationFuncionario.entities.Aluno;
-import com.company.applicationFuncionario.entities.Exercicio;
-import com.company.applicationFuncionario.entities.Funcionario;
-import com.company.applicationFuncionario.entities.Treino;
 import com.company.enums.Estado;
 import com.company.enums.Cargo;
+
+import java.util.List;
 
 public class Main{
 
@@ -18,7 +18,6 @@ public class Main{
         GenericDAO<String, Funcionario> funcDAO = new FuncionarioDAO();
         GenericDAO<String, Aluno> alunoDAO = new AlunoDAO();
         TreinoAlunoDAO treinoAlunoDAO = new TreinoAlunoDAO();
-
 
         System.out.println("______________________________funcionarios_______________________________");
         Funcionario instrutor1 = new Funcionario("55638129529", Cargo.INSTRUTOR, "renato", "senha123", Estado.ATIVO);
@@ -103,6 +102,24 @@ public class Main{
         treinoAlunoDAO.findTreinosAluno("43149910706").forEach(System.out::println);
         System.out.println();
         treinoAlunoDAO.findTreinosAluno("37984078785").forEach(System.out::println);
+
+        System.out.println("\n___________________________Exibindo Informações do____________________________");
+        System.out.println("________________________________Treino do Dia_________________________________");
+        List<TreinoAluno> treinosAluno = treinoAlunoDAO.findTreinosAluno("37984078785");
+
+        ControlarTreinoVinculado usecaseTreinoAluno = new ControlarTreinoVinculado(treinosAluno.get(treinosAluno.size() - 1), treinoDAO);
+
+        System.out.println("Total de Exercícios: " + usecaseTreinoAluno.getTotalExerciciosTreino());
+
+        System.out.println("Exercicios Concluidos: ");
+
+        usecaseTreinoAluno.concluirExercicio("Supino", 50);
+        usecaseTreinoAluno.concluirExercicio("Flexão de Braço", 0);
+
+        System.out.println("Exercicios Concluidos: ");
+        for (String exercicio : usecaseTreinoAluno.getSetExerciciosConcluidos()) {
+            System.out.println(exercicio);
+        }
 
     }
 }
