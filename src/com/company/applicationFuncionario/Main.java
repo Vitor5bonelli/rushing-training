@@ -7,6 +7,8 @@ import com.company.dao.*;
 import com.company.enums.Estado;
 import com.company.enums.Cargo;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class Main{
@@ -120,6 +122,10 @@ public class Main{
         for (String exercicio : usecaseTreinoAluno.getSetExerciciosConcluidos()) {
             System.out.println(exercicio);
         }
+
+        System.out.println("\n___________________________Exibindo Progresso_______________________________");
+        System.out.println("________________________________do Aluno_________________________________");
+
 
     }
 }

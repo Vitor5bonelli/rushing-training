@@ -14,7 +14,6 @@ import java.util.*;
 public class ControlarTreinoVinculado {
     private final Map<String, Integer> mapExercicioPeso = new HashMap<>();
     private final TreinoAluno treinoAluno;
-
     private final GenericDAO<String, Treino> treinoDAO;
 
     public ControlarTreinoVinculado(TreinoAluno treinoAluno, GenericDAO<String, Treino> treinoDAO) {

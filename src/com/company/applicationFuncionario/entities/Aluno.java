@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class Aluno implements Entidade<String> {
     private String matricula;
-    private final String senha;
+    private final int hashSenha;
     private String nome;
     private final CPF cpf;
     private String telefone;
@@ -19,25 +19,19 @@ public class Aluno implements Entidade<String> {
     private float altura;
     private Estado estadoAluno;
 
+    public Aluno(String senha, String nome, String cpf) {
+        this.cpf = new CPF(cpf);
+        hashSenha = senha.hashCode();
+        this.nome = nome;
+    }
+
+    public void mudarEstado(Estado estado){
+        estadoAluno = estado;
+    }
+
     public void setNome(String nome) {
         this.nome = nome;
     }
-
-    public Aluno(String senha, String nome, String cpf) {
-        this.cpf = new CPF(cpf);
-        this.senha = senha;
-        this.nome = nome;
-    }
-    // treino
-
-    public void inativarAluno(){
-        estadoAluno = Estado.INATIVO;
-    }
-
-    public void ativarAluno(){
-        estadoAluno = Estado.ATIVO;
-    }
-
 
     @Override
     public String getId() {
@@ -49,7 +43,7 @@ public class Aluno implements Entidade<String> {
         return "Aluno{" +
                 "nome='" + nome + '\'' +
                 ", cpf=" + cpf.getCpf() +
-                ", senha='" + senha + '\'' +
+                ", senha='" + hashSenha + '\'' +
                 '}';
     }
 }
